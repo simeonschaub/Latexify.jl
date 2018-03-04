@@ -22,3 +22,12 @@ Among the supported types are:
 - ParameterizedFunctions.
 
 It can also take arrays, which it recurses and latexifies the elements, returning an array of latex strings.
+
+```julia
+julia> arr = [1//3, "sin(x)"]
+julia> latexinline(arr)
+
+2-element Array{LaTeXStrings.LaTeXString,1}:
+ L"$\frac{1}{3}$"         
+ L"$\sin\left( x \right)$"
+```

@@ -1,0 +1,4 @@
+# `mdtable`
+```@docs
+mdtable()
+```
