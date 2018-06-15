@@ -15,7 +15,7 @@
                 backwards_reaction = false
                 continue
             end
-            str *= "\\ce{ "
+            str *= "\\cee{ "
 
             ### Expand functions to maths expressions
             rate = deepcopy(r.rate_org)
@@ -29,7 +29,7 @@
             str *= join(substrates, " + ")
 
             ### Generate reaction arrows
-            if i + 1 <= length(rn.reactions) && r.products == rn.reactions[i+1].substrates && r.substrates == rn.reactions[i+1].products 
+            if i + 1 <= length(rn.reactions) && r.products == rn.reactions[i+1].substrates && r.substrates == rn.reactions[i+1].products
                 ### Bi-directional arrows
                 rate_backwards = deepcopy(rn.reactions[i+1].rate_org)
                 expand && (rate_backwards = DiffEqBiological.recursive_clean!(rate_backwards))
@@ -48,7 +48,7 @@
             products = [latexraw("$(product.stoichiometry== 1 ? "" : "$(product.stoichiometry) * ") $(product.reactant)") for product in r.products ]
             isempty(products) && (products = ["\\varnothing"])
             str *= join(products, " + ")
-            str *= "}$eol"
+            str *= i == length(rn.reactions) ? "}\n" : "}$eol"
         end
         str *= starred ? "\\end{align*}\n" : "\\end{align}\n"
 
